@@ -286,3 +286,51 @@ class PaginationHelper {
     return Math.floor(itemIndex / this.itemsPerPage);
   }
 }
+
+
+// Complete the solution so that it strips all text that follows any of a set of comment markers passed in. Any whitespace at the end of the line should also be stripped out.
+
+// Example:
+
+// Given an input string of:
+
+// apples, pears # and bananas
+// grapes
+// bananas !apples
+// The output expected would be:
+
+// apples, pears
+// grapes
+// bananas
+// The code would be called like so:
+
+// var result = solution("apples, pears # and bananas\ngrapes\nbananas !apples", ["#", "!"])
+// // result should == "apples, pears\ngrapes\nbananas"
+
+// ✅ Solution:
+
+function solution(text, markers) {
+  // If there are no markers, trim the trailing whitespace and return the text
+  if (markers.length === 0) {
+    return text.trimEnd();
+  }
+  
+  // Split the text into lines
+  const lines = text.split('\n');
+  
+  // Process each line
+  const result = lines.map(line => {
+    // Find the index of the first occurrence of any marker
+    const markerIndex = markers
+      .map(marker => line.indexOf(marker))
+      .filter(index => index !== -1)
+      .reduce((min, current) => current < min ? current : min, line.length);
+    
+    // Return the substring up to the marker index, trimming trailing whitespace
+    return line.substring(0, markerIndex).trimEnd();
+  });
+  
+  // Join the processed lines back into a single string with newline separators
+  return result.join('\n');
+}
+
