@@ -262,18 +262,14 @@ class PaginationHelper {
     this.itemsPerPage = itemsPerPage;
   }
 
-  // Returns the number of items within the entire collection
   itemCount() {
     return this.collection.length;
   }
 
-  // Returns the number of pages
   pageCount() {
     return Math.ceil(this.itemCount() / this.itemsPerPage);
   }
 
-  // Returns the number of items on the current page. page_index is zero-based.
-  // This method should return -1 for pageIndex values that are out of range
   pageItemCount(pageIndex) {
     if (pageIndex < 0 || pageIndex >= this.pageCount()) {
       return -1;
@@ -283,8 +279,6 @@ class PaginationHelper {
     return endIndex - startIndex;
   }
 
-  // Determines what page an item is on. Zero-based indexes.
-  // This method should return -1 for itemIndex values that are out of range
   pageIndex(itemIndex) {
     if (itemIndex < 0 || itemIndex >= this.itemCount()) {
       return -1;
